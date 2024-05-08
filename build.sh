@@ -28,6 +28,8 @@
 # Usage: no parameters, settings mostly defined in xcode project
 # 
 
+set -ex
+
 opts="SKIP_INSTALL=NO BUILD_LIBRARIES_FOR_DISTRIBUTION=YES" 
 
 dd=./DerivedData
@@ -56,19 +58,6 @@ echo "building for $platform ..."
 xcodebuild archive -scheme $scheme -sdk $platform -destination="iOS Simulator" -derivedDataPath $dd \
     -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
 cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
-
-platform=maccatalyst
-echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk macosx -destination 'generic/platform=macOS,variant=Mac Catalyst,name=Any Mac' -derivedDataPath $dd \
-    -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
-cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
-
-platform=macosx
-echo "building for $platform ..."
-xcodebuild archive -scheme $scheme -sdk $platform -destination='My Mac' -derivedDataPath $dd \
-    -archivePath "$archivesPath/$platform.xcarchive" $opts > "build-$platform.log"
-cp -R "$archivesPath/$platform.xcarchive/$generatedPath" "$builtPath/Archive-$platform"
-
 
 # name of final ogg xcframework
 xcFramework=YbridOgg.xcframework

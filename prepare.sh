@@ -33,7 +33,9 @@ liboggDownload="https://downloads.xiph.org/releases/ogg/libogg-1.3.4.zip"
 here=$(pwd)
 
 logfile="$here/prepare.log"
-rm -rf libogg* > $logfile
+rm -rf libogg* include src > $logfile
+
+mkdir -p include src
 
 wget $liboggDownload >> $logfile
 unzip `basename $liboggDownload` >> $logfile
