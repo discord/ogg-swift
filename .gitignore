@@ -17,7 +17,6 @@ include/*.h
 include/COPYING
 src/*.h 
 src/*.c
-*.xcframework
 *.zip
 contributions/
 tmp
